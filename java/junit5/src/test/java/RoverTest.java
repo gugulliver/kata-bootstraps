@@ -94,4 +94,19 @@ public class RoverTest {
     
             assertEquals(orientation, ORIENTATION.EST);
         }
+
+                                
+        // The rover interpret command from earth
+        @Test
+        void rover_folow_instruction() {
+            Rover thirdRover = new Rover(); // 0,0 S
+            thirdRover.receiveCommands("FLF");
+            ORIENTATION curentOrientation = thirdRover.getOrientation();
+            Pair<Integer, Integer> curentPosition = thirdRover.getPosition();
+
+            Pair<Integer, Integer> expectedPosition = new Pair<>(1, 1);
+
+            assertEquals(curentOrientation, ORIENTATION.EST);
+            assertEquals(curentPosition, expectedPosition);
+        }
 }
