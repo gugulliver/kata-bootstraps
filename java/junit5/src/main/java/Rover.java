@@ -23,6 +23,9 @@ public class Rover {
     public ORIENTATION getOrientation() {
         return this.orientation;
     }
+    private void setOrientation(ORIENTATION orientation) {
+        this.orientation = orientation;
+    }
 
     public void goForward(int i) {
         switch (this.orientation) {
@@ -43,6 +46,15 @@ public class Rover {
 
     public void goBackward(int i) {
         this.goForward(-i);
+    }
+    public void turnRight() {
+        this.setOrientation(this.getOrientation().turnRight());
+    }
+
+    public void turnLeft() {
+        this.setOrientation(this.getOrientation().turnLeft());
+    }
+    public void receiveCommands(String string) {
     }
 
 }
