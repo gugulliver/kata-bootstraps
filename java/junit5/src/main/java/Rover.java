@@ -56,35 +56,35 @@ public class Rover {
         }
 
         // we check if we are on test on Earth or in real mission on Mars
-        if(this.planete.length >0){
-            int circonference = this.planete[0].length;
-            int polarCirconference = this.planete.length;
-
-            if(this.X <0){ // crossing North pole
-                this.X=0;
-                int newY= (circonference/2 +this.Y)%circonference;
-                this.Y = newY;
-                this.orientation = ORIENTATION.SOUTH; // once cross we are facing oposite direction
-            }
-            if(this.X >= polarCirconference){ // crossing South pole
-                this.X = polarCirconference-1;
-                int newY= (circonference/2 +this.Y)%circonference;
-                this.X = newY;
-                this.orientation = ORIENTATION.NORTH; // once cross we are facing oposite direction
-            }
-
-            if(this.Y <0){ // circonvolution West
-                this.Y=circonference-1;
-            }
-            if(this.Y >= circonference){ // circonvolution Est
-                this.Y=0;
-            }
+        if (this.planete.length > 0) {
+            this.civconvolutionCheck();
         }
     }
 
-    // private void civconvolutionCheck(){
+    private void civconvolutionCheck() {
+        int circonference = this.planete[0].length;
+        int polarCirconference = this.planete.length;
 
-    // }
+        if (this.X < 0) { // crossing North pole
+            this.X = 0;
+            int newY = (circonference / 2 + this.Y) % circonference;
+            this.Y = newY;
+            this.orientation = ORIENTATION.SOUTH; // once cross we are facing oposite direction
+        }
+        if (this.X >= polarCirconference) { // crossing South pole
+            this.X = polarCirconference - 1;
+            int newY = (circonference / 2 + this.Y) % circonference;
+            this.Y = newY;
+            this.orientation = ORIENTATION.NORTH; // once cross we are facing oposite direction
+        }
+
+        if (this.Y < 0) { // circonvolution West
+            this.Y = circonference - 1;
+        }
+        if (this.Y >= circonference) { // circonvolution Est
+            this.Y = 0;
+        }
+    }
 
     public void goBackward(int i) {
         this.goForward(-i);

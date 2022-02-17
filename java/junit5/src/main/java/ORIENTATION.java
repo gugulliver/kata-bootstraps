@@ -4,7 +4,9 @@ public enum ORIENTATION {
     SOUTH,
     WEST;
 
-    public ORIENTATION turnRight() {
+    // to represent a turn we go one step into the enum (which is sorted)
+    // If it reaching the end of it the return value is taken by the one from the other side 
+    public ORIENTATION turnRight() { 
         return this.ordinal() < ORIENTATION.values().length - 1
         ? ORIENTATION.values()[this.ordinal() + 1]
         : NORTH;

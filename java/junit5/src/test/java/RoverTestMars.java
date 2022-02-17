@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class RoverTestMars {
 
     // ADVENCE TEST
-    // The rover is noww on Mars
+    // The rover is now on Mars
     // "Implement wrapping from one edge of the grid to another. (planets are
     // spheres after all)"
 
@@ -14,7 +14,7 @@ public class RoverTestMars {
 
     // The rover should take into acount the spherical shape of Mars
     @Test
-    void rover_cross_pole() {
+    void rover_cross_north_pole() {
         Pair<Integer, Integer> landingPosition = Pair.with(0, 2);
 
         Rover firstMarsRover = new Rover(landingPosition, ORIENTATION.NORTH, MARS);
@@ -28,7 +28,21 @@ public class RoverTestMars {
         assertEquals(orientation, ORIENTATION.SOUTH);
     }
 
-    // The rover should take into acount the spherical shape of Mars
+    @Test
+    void rover_cross_south_pole() {
+        Pair<Integer, Integer> landingPosition = Pair.with(5, 2);
+
+        Rover firstMarsRover = new Rover(landingPosition, ORIENTATION.SOUTH, MARS);
+        firstMarsRover.receiveCommands("F");
+
+        Pair<Integer, Integer> position = firstMarsRover.getPosition();
+        ORIENTATION orientation = firstMarsRover.getOrientation();
+
+        Pair<Integer, Integer> expectedPosition = Pair.with(5, 5);
+        assertEquals(expectedPosition, position);
+        assertEquals(orientation, ORIENTATION.NORTH);
+    } 
+
     @Test
     void rover_make_a_circumnavigation_est() {
         Pair<Integer, Integer> landingPosition = Pair.with(1, 5);
