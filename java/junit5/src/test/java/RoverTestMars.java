@@ -30,7 +30,7 @@ public class RoverTestMars {
 
     // The rover should take into acount the spherical shape of Mars
     @Test
-    void rover_make_a_circumnavigation() {
+    void rover_make_a_circumnavigation_est() {
         Pair<Integer, Integer> landingPosition = Pair.with(1, 5);
 
         Rover firstMarsRover = new Rover(landingPosition, ORIENTATION.EST, MARS);
@@ -42,5 +42,20 @@ public class RoverTestMars {
         Pair<Integer, Integer> expectedPosition = Pair.with(1, 0);
         assertEquals(expectedPosition, position);
         assertEquals(orientation, ORIENTATION.EST);
+    }
+
+    @Test
+    void rover_make_a_circumnavigation_west() {
+        Pair<Integer, Integer> landingPosition = Pair.with(5, 0);
+
+        Rover firstMarsRover = new Rover(landingPosition, ORIENTATION.WEST, MARS);
+        firstMarsRover.receiveCommands("FF");
+
+        Pair<Integer, Integer> position = firstMarsRover.getPosition();
+        ORIENTATION orientation = firstMarsRover.getOrientation();
+
+        Pair<Integer, Integer> expectedPosition = Pair.with(5, 4);
+        assertEquals(expectedPosition, position);
+        assertEquals(orientation, ORIENTATION.WEST);
     }
 }
