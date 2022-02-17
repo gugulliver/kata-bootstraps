@@ -17,8 +17,25 @@ public class RoverTest {
         assertEquals(expectedPosition, position);
     }
 
+    // The rover should be able to go forward
     @Test
-    void it_should_not_fail() {
-        assertTrue(true);
+    void rover_advance() {
+        Rover firstRover = new Rover();
+        firstRover.goForward(1);
+        Pair<Integer, Integer> position = firstRover.getPosition();
+
+        Pair<Integer, Integer> expectedPosition = new Pair<>(1,0);
+        assertEquals(expectedPosition, position);
+    }
+    
+    // The rover should be able to go backward
+    @Test
+    void rover_retreat() {
+        Rover firstRover = new Rover();
+        firstRover.goBackward(1);
+        Pair<Integer, Integer> position = firstRover.getPosition();
+
+        Pair<Integer, Integer> expectedPosition = new Pair<>(-1,0);
+        assertEquals(expectedPosition, position);
     }
 }

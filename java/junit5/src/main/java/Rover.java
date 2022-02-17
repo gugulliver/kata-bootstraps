@@ -8,4 +8,10 @@ public class Rover {
     public Pair<Integer, Integer> getPosition() {
         return this.position;
     }
+
+    public void goBackward(int i) {
+    }
+
+    public void goForward(int i) {
+    }
 }
