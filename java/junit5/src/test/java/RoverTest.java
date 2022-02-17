@@ -71,4 +71,27 @@ public class RoverTest {
             Pair<Integer, Integer> expectedPosition = new Pair<>(-5,0);
             assertEquals(expectedPosition, position);
         }
+
+                
+        // The rover should be able to turn Left
+        @Test
+        void rover_turn_left() {
+            Pair<Integer, Integer> expectedPosition = Pair.with(1, 1);
+            Rover secondRover = new Rover(expectedPosition, ORIENTATION.NORTH);
+            secondRover.turnLeft();
+            ORIENTATION orientation = secondRover.getOrientation();
+    
+            assertEquals(orientation, ORIENTATION.WEST);
+        }
+                        
+        // The rover should be able to turn Right
+        @Test
+        void rover_turn_right() {
+            Pair<Integer, Integer> expectedPosition = Pair.with(1, 1);
+            Rover secondRover = new Rover(expectedPosition, ORIENTATION.NORTH);
+            secondRover.turnRight();
+            ORIENTATION orientation = secondRover.getOrientation();
+    
+            assertEquals(orientation, ORIENTATION.EST);
+        }
 }
