@@ -12,7 +12,7 @@ public enum ORIENTATION {
     }
     
     public ORIENTATION turnLeft() {
-        return this.ordinal() < 0
+        return this.ordinal() > 0
         ? ORIENTATION.values()[this.ordinal() - 1]
         : WEST;
 

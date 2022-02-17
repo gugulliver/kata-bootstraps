@@ -83,6 +83,15 @@ public class RoverTest {
     
             assertEquals(orientation, ORIENTATION.WEST);
         }
+        @Test
+        void rover_turn_left_2() {
+            Pair<Integer, Integer> expectedPosition = Pair.with(1, 1);
+            Rover secondRover = new Rover(expectedPosition, ORIENTATION.SOUTH);
+            secondRover.turnLeft();
+            ORIENTATION orientation = secondRover.getOrientation();
+    
+            assertEquals(ORIENTATION.EST, orientation);
+        }
                         
         // The rover should be able to turn Right
         @Test
