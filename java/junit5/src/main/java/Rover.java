@@ -9,7 +9,7 @@ public class Rover {
     private Integer X = 0;
     private Integer Y = 0;
     private ORIENTATION orientation = ORIENTATION.SOUTH;
-    private int[][] planete = { {}, {} };
+    private int[][] planete = {};
 
     public Rover() {
     }
@@ -61,13 +61,7 @@ public class Rover {
         // we check if we are on test on Earth or in real mission on Mars
         if (this.planete.length > 0) {
             this.civconvolutionCheck();
-            if (this.planete[this.X][this.Y] == 1) { // obstacle
-
-                this.X = previousPosition.getValue0();
-                this.Y = previousPosition.getValue1();
-                throw new ObstacleEnconterException("Obstacle encounter");
-
-            }
+            this.obstacleCheck(previousPosition);
         }
     }
 
@@ -77,13 +71,13 @@ public class Rover {
 
         if (this.X < 0) { // crossing North pole
             this.X = 0;
-            int newY = (circonference / 2 + this.Y) % circonference;
+            int newY = ((circonference / 2) + this.Y) % circonference;
             this.Y = newY;
             this.orientation = ORIENTATION.SOUTH; // once cross we are facing oposite direction
         }
         if (this.X >= polarCirconference) { // crossing South pole
             this.X = polarCirconference - 1;
-            int newY = (circonference / 2 + this.Y) % circonference;
+            int newY = ((circonference / 2) + this.Y) % circonference;
             this.Y = newY;
             this.orientation = ORIENTATION.NORTH; // once cross we are facing oposite direction
         }
@@ -93,6 +87,16 @@ public class Rover {
         }
         if (this.Y >= circonference) { // circonvolution Est
             this.Y = 0;
+        }
+    }
+
+    private void obstacleCheck(Pair<Integer, Integer> previousPosition) throws ObstacleEnconterException {
+        if (this.planete[this.X][this.Y] == 1) { // obstacle
+
+            this.X = previousPosition.getValue0();
+            this.Y = previousPosition.getValue1();
+            throw new ObstacleEnconterException("Obstacle encounter");
+
         }
     }
 
@@ -109,7 +113,7 @@ public class Rover {
     }
 
     public void receiveCommands(String command) {
-        for(String c: command.split("")){
+        for (String c : command.split("")) {
             try {
                 this.consumeSingleCommand(c);
             } catch (ObstacleEnconterException e) {
@@ -123,7 +127,6 @@ public class Rover {
         switch (command) {
             case "F":
                 this.goForward(1);
-
                 break;
             case "B":
                 this.goBackward(1);
