@@ -35,7 +35,11 @@ public class RoverTest {
     @Test
     void rover_advance() {
         Rover firstRover = new Rover();
-        firstRover.goForward(1);
+        try {
+            firstRover.goForward(1);
+        } catch (ObstacleEnconterException e) {
+            e.printStackTrace();
+        }
         Pair<Integer, Integer> position = firstRover.getPosition();
 
         Pair<Integer, Integer> expectedPosition = new Pair<>(1, 0);
@@ -46,7 +50,11 @@ public class RoverTest {
     @Test
     void rover_retreat() {
         Rover firstRover = new Rover();
-        firstRover.goBackward(1);
+        try {
+            firstRover.goBackward(1);
+        } catch (ObstacleEnconterException e) {
+            e.printStackTrace();
+        }
         Pair<Integer, Integer> position = firstRover.getPosition();
 
         Pair<Integer, Integer> expectedPosition = new Pair<>(-1, 0);
@@ -57,7 +65,11 @@ public class RoverTest {
     @Test
     void rover_advance_multiple() {
         Rover firstRover = new Rover();
-        firstRover.goForward(5);
+        try {
+            firstRover.goForward(5);
+        } catch (ObstacleEnconterException e) {
+            e.printStackTrace();
+        }
         Pair<Integer, Integer> position = firstRover.getPosition();
 
         Pair<Integer, Integer> expectedPosition = new Pair<>(5, 0);
@@ -68,7 +80,11 @@ public class RoverTest {
     @Test
     void rover_retreat_multiple() {
         Rover firstRover = new Rover();
-        firstRover.goBackward(5);
+        try {
+            firstRover.goBackward(5);
+        } catch (ObstacleEnconterException e) {
+            e.printStackTrace();
+        }
         Pair<Integer, Integer> position = firstRover.getPosition();
 
         Pair<Integer, Integer> expectedPosition = new Pair<>(-5, 0);

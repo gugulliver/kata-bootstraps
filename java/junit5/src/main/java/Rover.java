@@ -1,9 +1,11 @@
 import java.security.InvalidParameterException;
 
 import org.javatuples.Pair;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Rover {
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(Rover.class);
     private Integer X = 0;
     private Integer Y = 0;
     private ORIENTATION orientation = ORIENTATION.SOUTH;
@@ -39,7 +41,8 @@ public class Rover {
         this.orientation = orientation;
     }
 
-    public void goForward(int i) {
+    public void goForward(int i) throws ObstacleEnconterException {
+        Pair<Integer, Integer> previousPosition = this.getPosition();
         switch (this.orientation) {
             case NORTH:
                 this.X -= i;
@@ -58,6 +61,13 @@ public class Rover {
         // we check if we are on test on Earth or in real mission on Mars
         if (this.planete.length > 0) {
             this.civconvolutionCheck();
+            if (this.planete[this.X][this.Y] == 1) { // obstacle
+
+                this.X = previousPosition.getValue0();
+                this.Y = previousPosition.getValue1();
+                throw new ObstacleEnconterException("Obstacle encounter");
+
+            }
         }
     }
 
@@ -86,7 +96,7 @@ public class Rover {
         }
     }
 
-    public void goBackward(int i) {
+    public void goBackward(int i) throws ObstacleEnconterException {
         this.goForward(-i);
     }
 
@@ -99,23 +109,29 @@ public class Rover {
     }
 
     public void receiveCommands(String command) {
-        command.chars()
-                .mapToObj(c -> (char) c)
-                .forEach(c -> this.consumeSingleCommand(c));
+        for(String c: command.split("")){
+            try {
+                this.consumeSingleCommand(c);
+            } catch (ObstacleEnconterException e) {
+                LOGGER.warn("Obstacle enconter");
+                return;
+            }
+        }
     }
 
-    public void consumeSingleCommand(char command) {
+    public void consumeSingleCommand(String command) throws ObstacleEnconterException {
         switch (command) {
-            case 'F':
+            case "F":
                 this.goForward(1);
+
                 break;
-            case 'B':
+            case "B":
                 this.goBackward(1);
                 break;
-            case 'R':
+            case "R":
                 this.turnRight();
                 break;
-            case 'L':
+            case "L":
                 this.turnLeft();
                 break;
             default:

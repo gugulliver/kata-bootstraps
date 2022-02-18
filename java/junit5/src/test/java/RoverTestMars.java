@@ -72,4 +72,23 @@ public class RoverTestMars {
         assertEquals(expectedPosition, position);
         assertEquals(orientation, ORIENTATION.WEST);
     }
+
+    
+    @Test
+    void rover_enconter_obstacle() {
+        MARS[3][4]=1;
+
+        Pair<Integer, Integer> landingPosition = Pair.with(2, 3);
+        Rover firstMarsRover = new Rover(landingPosition, ORIENTATION.SOUTH, MARS);
+
+        firstMarsRover.receiveCommands("FLFRF"); // the second F shound enconter obstacle
+
+
+        Pair<Integer, Integer> position = firstMarsRover.getPosition();
+        ORIENTATION orientation = firstMarsRover.getOrientation();
+
+        Pair<Integer, Integer> expectedPosition = Pair.with(3, 3);
+        assertEquals(expectedPosition, position);
+        assertEquals(orientation, ORIENTATION.EST);
+    }
 }
